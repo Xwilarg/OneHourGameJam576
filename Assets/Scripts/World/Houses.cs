@@ -5,7 +5,7 @@ namespace OneHourJam.World
 {
     public class Houses : MonoBehaviour
     {
-        private float _timer = 2f;
+        private float _timer = 1f;
 
         private void Update()
         {
@@ -14,7 +14,7 @@ namespace OneHourJam.World
             _timer -= Time.deltaTime * GameManager.Instance.DifficultyLevel;
             if (_timer <= 0f)
             {
-                _timer = 2f;
+                _timer = 1f;
                 GameManager.Instance.LooseFood();
             }
         }

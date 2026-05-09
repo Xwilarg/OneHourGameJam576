@@ -49,7 +49,7 @@ namespace OneHourJam.Manager
             _gold++;
             if (_gold % 50 == 0)
             {
-                _food = 20;
+                if (_food > 20) _food = 20;
                 var index = _gold / 50;
                 _image.sprite = _progressionSprite[index];
                 if (index == _progressionSprite.Length - 1)
