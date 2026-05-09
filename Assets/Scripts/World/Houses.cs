@@ -9,6 +9,8 @@ namespace OneHourJam.World
 
         private void Update()
         {
+            if (!GameManager.Instance.IsPlaying) return;
+
             _timer -= Time.deltaTime * GameManager.Instance.DifficultyLevel;
             if (_timer <= 0f)
             {

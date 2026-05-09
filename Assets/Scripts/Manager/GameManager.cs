@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace OneHourJam.Manager
 {
@@ -13,7 +14,15 @@ namespace OneHourJam.Manager
         [SerializeField]
         private TMP_Text _resourcesText;
 
+        [SerializeField]
+        private Image _image;
+
+        [SerializeField]
+        private Sprite[] _progressionSprite;
+
         private Camera _cam;
+
+        public bool IsPlaying { private set; get; } = true;
 
         private int _gold;
         private int _food = 20;
@@ -23,7 +32,12 @@ namespace OneHourJam.Manager
         public void GainGold()
         {
             _gold++;
-            if (_gold == 50) _food = 20;
+            if (_gold % 50 == 0)
+            {
+                _food = 20;
+                _image.sprite = _progressionSprite[_gold / 50];
+                if (_progressionSprite.Length == _progressionSprite.Length - 1) IsPlaying = false;
+            }
             UpdateUI();
         }
         public void GainFood()
@@ -56,7 +70,7 @@ namespace OneHourJam.Manager
 
         public void OnClick(InputAction.CallbackContext value)
         {
-            if (value.phase == InputActionPhase.Started)
+            if (value.phase == InputActionPhase.Started && IsPlaying)
             {
                 var ray = _cam.ScreenPointToRay(Mouse.current.position.ReadValue());
                 var hit = Physics2D.GetRayIntersection(ray, float.MaxValue, LayerMask.GetMask("Prop"));

@@ -1212,6 +1212,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OneHourJam.Manager.GameManager
   _resourcesText: {fileID: 971395601}
+  _image: {fileID: 1191640024}
+  _progressionSprite: []
 --- !u!4 &1596811253
 Transform:
   m_ObjectHideFlags: 0
