@@ -20,6 +20,12 @@ namespace OneHourJam.Manager
         [SerializeField]
         private Sprite[] _progressionSprite;
 
+        [SerializeField]
+        private Sprite _cum;
+
+        [SerializeField]
+        private GameObject _winningInfo;
+
         private Camera _cam;
 
         public bool IsPlaying { private set; get; } = true;
@@ -29,15 +35,28 @@ namespace OneHourJam.Manager
 
         public int DifficultyLevel => (_gold / 50) + 1;
 
+        public void CoverWithCum()
+        {
+            if (!IsPlaying)
+            {
+                _winningInfo.SetActive(false);
+                _image.sprite = _cum;
+            }
+        }
+
         public void GainGold()
         {
-            _gold += 10;
+            _gold++;
             if (_gold % 50 == 0)
             {
                 _food = 20;
                 var index = _gold / 50;
                 _image.sprite = _progressionSprite[index];
-                if (index == _progressionSprite.Length - 1) IsPlaying = false;
+                if (index == _progressionSprite.Length - 1)
+                {
+                    _winningInfo.SetActive(true);
+                    IsPlaying = false;
+                }
             }
             UpdateUI();
         }
