@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace OneHourJam.Manager
 {
@@ -22,6 +23,7 @@ namespace OneHourJam.Manager
         public void GainGold()
         {
             _gold++;
+            if (_gold == 50) _food = 20;
             UpdateUI();
         }
         public void GainFood()
@@ -32,6 +34,11 @@ namespace OneHourJam.Manager
         public void LooseFood()
         {
             _food--;
+            if (_food == 0)
+            {
+                SceneManager.LoadScene("Loose");
+                return;
+            }
             UpdateUI();
         }
 
