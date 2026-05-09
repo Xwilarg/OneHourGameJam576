@@ -31,12 +31,13 @@ namespace OneHourJam.Manager
 
         public void GainGold()
         {
-            _gold++;
+            _gold += 10;
             if (_gold % 50 == 0)
             {
                 _food = 20;
-                _image.sprite = _progressionSprite[_gold / 50];
-                if (_progressionSprite.Length == _progressionSprite.Length - 1) IsPlaying = false;
+                var index = _gold / 50;
+                _image.sprite = _progressionSprite[index];
+                if (index == _progressionSprite.Length - 1) IsPlaying = false;
             }
             UpdateUI();
         }
